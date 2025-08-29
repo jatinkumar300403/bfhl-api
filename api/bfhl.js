@@ -3,48 +3,48 @@ export default function handler(req, res) {
     try {
       const data = req.body.data || [];
 
-      let even_numbers = [];
-      let odd_numbers = [];
+      let en = [];
+      let on = [];
+      let chars = [];
       let alphabets = [];
-      let special_characters = [];
       let sum = 0;
-      let concat_string = "";
+      let concat_str = "";
 
       data.forEach(item => {
         if (/^\d+$/.test(item)) {
           let num = parseInt(item, 10);
-          if (num % 2 === 0) even_numbers.push(item);
-          else odd_numbers.push(item);
+          if (num % 2 === 0) en.push(item);
+          else on.push(item);
           sum += num;
         } else if (/^[a-zA-Z]+$/.test(item)) {
           alphabets.push(item.toUpperCase());
-          concat_string += item;
+          concat_str += item;
         } else {
-          special_characters.push(item);
+          chars.push(item);
         }
       });
 
-      let reversed = concat_string.split("").reverse();
+      let reversed = concat_str.split("").reverse();
       let altCaps = reversed.map((ch, idx) =>
         idx % 2 === 0 ? ch.toUpperCase() : ch.toLowerCase()
       ).join("");
 
       return res.status(200).json({
         is_success: true,
-        user_id: "jatin_kumar_01012002",
-        email: "jatin.kumar2022@vitstudent.ac.in",
+        user_id: "jatin_kumar_1",
         roll_number: "22BCE2716",
-        odd_numbers,
-        even_numbers,
+        email: "jatin.kumar2022@vitstudent.ac.in",
+        on,
+        en,
         alphabets,
-        special_characters,
+        chars,
         sum: sum.toString(),
-        concat_string: altCaps
+        concat_str: altCaps
       });
     } catch (error) {
       return res.status(500).json({ is_success: false, error: error.message });
     }
   } else {
-    return res.status(405).json({ message: "Only POST requests allowed" });
+    return res.status(405).json({ message: "valid" });
   }
 }
