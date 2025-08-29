@@ -1,0 +1,5 @@
+{
+  "routes": [
+    { "src": "/bfhl", "dest": "/api/bfhl.js" }
+  ]
+}
